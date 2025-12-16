@@ -11,22 +11,13 @@ client = AzureOpenAI(
 )
 
 prompt = (
-    "Translate the English to Korean:\n"
-    "English: Hello. \n Korean: 안녕하세요.\n"
-    "English: I love programming. \n Korean:"
+    "If Alex is taller than Bob \n"
+    "And Bob is taller then Joe\n"
+    "Who is the tallest? Let me think step by step."
 )
 
 response = client.chat.completions.create(
-    messages=[
-        {
-            "role": "system",
-            "content": "You are a helpful assistant.",
-        },
-        {
-            "role": "user",
-            "content": "I am going to Paris, what should I see?",
-        }
-    ],
+    messages=[{"role": "user", "content": prompt}],
     max_completion_tokens=100000,
     model=os.getenv("AZURE_OPENAI_DEPLOYMENT")
 )
